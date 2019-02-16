@@ -21,7 +21,6 @@ function generateToken(params = {}) {
 	"password": "1234"
 }
 */
-
 router.post('/register', async (req, res) => {
     const { email } = req.body
     try {
@@ -31,7 +30,7 @@ router.post('/register', async (req, res) => {
         const user = await User.create(req.body);
         user.password = undefined;
         return res.send({ user, token: generateToken({id: user.id},) });
-    } catch{
+    } catch (error) {
         return res.status(400).send({ 'error': 'Registrations failde' });
     }
 })
@@ -43,7 +42,6 @@ router.post('/register', async (req, res) => {
 	"password": "1234"
 }
 */
-
 router.post('/autenticate', async (req, res) => {
     const { email, password } = req.body;
     if(email == undefined || password == undefined) 
